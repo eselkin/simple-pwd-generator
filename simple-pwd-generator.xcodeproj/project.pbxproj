@@ -1,0 +1,550 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		D5C32C1B2C4B14B60063BAD6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D5C32C002C4B14B30063BAD6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D5C32C072C4B14B30063BAD6;
+			remoteInfo = "simple-pwd-generator";
+		};
+		D5C32C252C4B14B60063BAD6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D5C32C002C4B14B30063BAD6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D5C32C072C4B14B30063BAD6;
+			remoteInfo = "simple-pwd-generator";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D5C32C082C4B14B30063BAD6 /* simple-pwd-generator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "simple-pwd-generator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5C32C1A2C4B14B60063BAD6 /* simple-pwd-generatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "simple-pwd-generatorTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5C32C242C4B14B60063BAD6 /* simple-pwd-generatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "simple-pwd-generatorUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		D5C32C0A2C4B14B30063BAD6 /* simple-pwd-generator */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "simple-pwd-generator"; sourceTree = "<group>"; };
+		D5C32C1D2C4B14B60063BAD6 /* simple-pwd-generatorTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "simple-pwd-generatorTests"; sourceTree = "<group>"; };
+		D5C32C272C4B14B60063BAD6 /* simple-pwd-generatorUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "simple-pwd-generatorUITests"; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D5C32C052C4B14B30063BAD6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5C32C172C4B14B60063BAD6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5C32C212C4B14B60063BAD6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D5C32BFF2C4B14B30063BAD6 = {
+			isa = PBXGroup;
+			children = (
+				D5C32C0A2C4B14B30063BAD6 /* simple-pwd-generator */,
+				D5C32C1D2C4B14B60063BAD6 /* simple-pwd-generatorTests */,
+				D5C32C272C4B14B60063BAD6 /* simple-pwd-generatorUITests */,
+				D5C32C092C4B14B30063BAD6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D5C32C092C4B14B30063BAD6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D5C32C082C4B14B30063BAD6 /* simple-pwd-generator.app */,
+				D5C32C1A2C4B14B60063BAD6 /* simple-pwd-generatorTests.xctest */,
+				D5C32C242C4B14B60063BAD6 /* simple-pwd-generatorUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D5C32C072C4B14B30063BAD6 /* simple-pwd-generator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D5C32C2E2C4B14B60063BAD6 /* Build configuration list for PBXNativeTarget "simple-pwd-generator" */;
+			buildPhases = (
+				D5C32C042C4B14B30063BAD6 /* Sources */,
+				D5C32C052C4B14B30063BAD6 /* Frameworks */,
+				D5C32C062C4B14B30063BAD6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				D5C32C0A2C4B14B30063BAD6 /* simple-pwd-generator */,
+			);
+			name = "simple-pwd-generator";
+			packageProductDependencies = (
+			);
+			productName = "simple-pwd-generator";
+			productReference = D5C32C082C4B14B30063BAD6 /* simple-pwd-generator.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D5C32C192C4B14B60063BAD6 /* simple-pwd-generatorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D5C32C312C4B14B60063BAD6 /* Build configuration list for PBXNativeTarget "simple-pwd-generatorTests" */;
+			buildPhases = (
+				D5C32C162C4B14B60063BAD6 /* Sources */,
+				D5C32C172C4B14B60063BAD6 /* Frameworks */,
+				D5C32C182C4B14B60063BAD6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D5C32C1C2C4B14B60063BAD6 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				D5C32C1D2C4B14B60063BAD6 /* simple-pwd-generatorTests */,
+			);
+			name = "simple-pwd-generatorTests";
+			packageProductDependencies = (
+			);
+			productName = "simple-pwd-generatorTests";
+			productReference = D5C32C1A2C4B14B60063BAD6 /* simple-pwd-generatorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D5C32C232C4B14B60063BAD6 /* simple-pwd-generatorUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D5C32C342C4B14B60063BAD6 /* Build configuration list for PBXNativeTarget "simple-pwd-generatorUITests" */;
+			buildPhases = (
+				D5C32C202C4B14B60063BAD6 /* Sources */,
+				D5C32C212C4B14B60063BAD6 /* Frameworks */,
+				D5C32C222C4B14B60063BAD6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D5C32C262C4B14B60063BAD6 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				D5C32C272C4B14B60063BAD6 /* simple-pwd-generatorUITests */,
+			);
+			name = "simple-pwd-generatorUITests";
+			packageProductDependencies = (
+			);
+			productName = "simple-pwd-generatorUITests";
+			productReference = D5C32C242C4B14B60063BAD6 /* simple-pwd-generatorUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D5C32C002C4B14B30063BAD6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					D5C32C072C4B14B30063BAD6 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+					D5C32C192C4B14B60063BAD6 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = D5C32C072C4B14B30063BAD6;
+					};
+					D5C32C232C4B14B60063BAD6 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = D5C32C072C4B14B30063BAD6;
+					};
+				};
+			};
+			buildConfigurationList = D5C32C032C4B14B30063BAD6 /* Build configuration list for PBXProject "simple-pwd-generator" */;
+			compatibilityVersion = "Xcode 15.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D5C32BFF2C4B14B30063BAD6;
+			productRefGroup = D5C32C092C4B14B30063BAD6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D5C32C072C4B14B30063BAD6 /* simple-pwd-generator */,
+				D5C32C192C4B14B60063BAD6 /* simple-pwd-generatorTests */,
+				D5C32C232C4B14B60063BAD6 /* simple-pwd-generatorUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D5C32C062C4B14B30063BAD6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5C32C182C4B14B60063BAD6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5C32C222C4B14B60063BAD6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D5C32C042C4B14B30063BAD6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5C32C162C4B14B60063BAD6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5C32C202C4B14B60063BAD6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D5C32C1C2C4B14B60063BAD6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D5C32C072C4B14B30063BAD6 /* simple-pwd-generator */;
+			targetProxy = D5C32C1B2C4B14B60063BAD6 /* PBXContainerItemProxy */;
+		};
+		D5C32C262C4B14B60063BAD6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D5C32C072C4B14B30063BAD6 /* simple-pwd-generator */;
+			targetProxy = D5C32C252C4B14B60063BAD6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		D5C32C2C2C4B14B60063BAD6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D5C32C2D2C4B14B60063BAD6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D5C32C2F2C4B14B60063BAD6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"simple-pwd-generator/Preview Content\"";
+				DEVELOPMENT_TEAM = CNKFCAS44G;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.eliselkin.simple-pwd-generator";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D5C32C302C4B14B60063BAD6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"simple-pwd-generator/Preview Content\"";
+				DEVELOPMENT_TEAM = CNKFCAS44G;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.eliselkin.simple-pwd-generator";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D5C32C322C4B14B60063BAD6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CNKFCAS44G;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.eliselkin.simple-pwd-generatorTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/simple-pwd-generator.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/simple-pwd-generator";
+			};
+			name = Debug;
+		};
+		D5C32C332C4B14B60063BAD6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CNKFCAS44G;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.eliselkin.simple-pwd-generatorTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/simple-pwd-generator.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/simple-pwd-generator";
+			};
+			name = Release;
+		};
+		D5C32C352C4B14B60063BAD6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CNKFCAS44G;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.eliselkin.simple-pwd-generatorUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "simple-pwd-generator";
+			};
+			name = Debug;
+		};
+		D5C32C362C4B14B60063BAD6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CNKFCAS44G;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.eliselkin.simple-pwd-generatorUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "simple-pwd-generator";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D5C32C032C4B14B30063BAD6 /* Build configuration list for PBXProject "simple-pwd-generator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5C32C2C2C4B14B60063BAD6 /* Debug */,
+				D5C32C2D2C4B14B60063BAD6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D5C32C2E2C4B14B60063BAD6 /* Build configuration list for PBXNativeTarget "simple-pwd-generator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5C32C2F2C4B14B60063BAD6 /* Debug */,
+				D5C32C302C4B14B60063BAD6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D5C32C312C4B14B60063BAD6 /* Build configuration list for PBXNativeTarget "simple-pwd-generatorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5C32C322C4B14B60063BAD6 /* Debug */,
+				D5C32C332C4B14B60063BAD6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D5C32C342C4B14B60063BAD6 /* Build configuration list for PBXNativeTarget "simple-pwd-generatorUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5C32C352C4B14B60063BAD6 /* Debug */,
+				D5C32C362C4B14B60063BAD6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D5C32C002C4B14B30063BAD6 /* Project object */;
+}
