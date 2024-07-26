@@ -9,10 +9,12 @@ import Foundation
 import SwiftData
 
 @Model
-final class Item {
+final class PasswordItem {
     var timestamp: Date
+    var password: String
     
     init(timestamp: Date) {
         self.timestamp = timestamp
+        self.password = ""
     }
 }

@@ -3,8 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 70;
 	objects = {
+
+/* Begin PBXBuildFile section */
+		D5BA543D2C52FF9A007CF165 /* zxcvbn in Frameworks */ = {isa = PBXBuildFile; productRef = D5BA543C2C52FF9A007CF165 /* zxcvbn */; };
+		D5BA543F2C52FFA4007CF165 /* zxcvbn in Frameworks */ = {isa = PBXBuildFile; productRef = D5BA543E2C52FFA4007CF165 /* zxcvbn */; };
+		D5BA54412C52FFB2007CF165 /* zxcvbn in Frameworks */ = {isa = PBXBuildFile; productRef = D5BA54402C52FFB2007CF165 /* zxcvbn */; };
+/* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		D5C32C1B2C4B14B60063BAD6 /* PBXContainerItemProxy */ = {
@@ -29,8 +35,25 @@
 		D5C32C242C4B14B60063BAD6 /* simple-pwd-generatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "simple-pwd-generatorUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		D5D585F12C4EC5C600212568 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				password_tools/en.txt,
+			);
+			target = D5C32C192C4B14B60063BAD6 /* simple-pwd-generatorTests */;
+		};
+		D5D585F22C4EC5C600212568 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				password_tools/en.txt,
+			);
+			target = D5C32C232C4B14B60063BAD6 /* simple-pwd-generatorUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		D5C32C0A2C4B14B30063BAD6 /* simple-pwd-generator */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "simple-pwd-generator"; sourceTree = "<group>"; };
+		D5C32C0A2C4B14B30063BAD6 /* simple-pwd-generator */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (D5D585F12C4EC5C600212568 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, D5D585F22C4EC5C600212568 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = "simple-pwd-generator"; sourceTree = "<group>"; };
 		D5C32C1D2C4B14B60063BAD6 /* simple-pwd-generatorTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "simple-pwd-generatorTests"; sourceTree = "<group>"; };
 		D5C32C272C4B14B60063BAD6 /* simple-pwd-generatorUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "simple-pwd-generatorUITests"; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -40,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5BA543D2C52FF9A007CF165 /* zxcvbn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5BA543F2C52FFA4007CF165 /* zxcvbn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5BA54412C52FFB2007CF165 /* zxcvbn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,6 +126,7 @@
 			);
 			name = "simple-pwd-generator";
 			packageProductDependencies = (
+				D5BA543C2C52FF9A007CF165 /* zxcvbn */,
 			);
 			productName = "simple-pwd-generator";
 			productReference = D5C32C082C4B14B30063BAD6 /* simple-pwd-generator.app */;
@@ -123,6 +150,7 @@
 			);
 			name = "simple-pwd-generatorTests";
 			packageProductDependencies = (
+				D5BA543E2C52FFA4007CF165 /* zxcvbn */,
 			);
 			productName = "simple-pwd-generatorTests";
 			productReference = D5C32C1A2C4B14B60063BAD6 /* simple-pwd-generatorTests.xctest */;
@@ -146,6 +174,7 @@
 			);
 			name = "simple-pwd-generatorUITests";
 			packageProductDependencies = (
+				D5BA54402C52FFB2007CF165 /* zxcvbn */,
 			);
 			productName = "simple-pwd-generatorUITests";
 			productReference = D5C32C242C4B14B60063BAD6 /* simple-pwd-generatorUITests.xctest */;
@@ -183,6 +212,9 @@
 				Base,
 			);
 			mainGroup = D5C32BFF2C4B14B30063BAD6;
+			packageReferences = (
+				D5C32C382C4B16B70063BAD6 /* XCRemoteSwiftPackageReference "zxcvbn-swift" */,
+			);
 			productRefGroup = D5C32C092C4B14B30063BAD6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -545,6 +577,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D5C32C382C4B16B70063BAD6 /* XCRemoteSwiftPackageReference "zxcvbn-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/DeVitoC/zxcvbn-swift.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D5BA543C2C52FF9A007CF165 /* zxcvbn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D5C32C382C4B16B70063BAD6 /* XCRemoteSwiftPackageReference "zxcvbn-swift" */;
+			productName = zxcvbn;
+		};
+		D5BA543E2C52FFA4007CF165 /* zxcvbn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D5C32C382C4B16B70063BAD6 /* XCRemoteSwiftPackageReference "zxcvbn-swift" */;
+			productName = zxcvbn;
+		};
+		D5BA54402C52FFB2007CF165 /* zxcvbn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D5C32C382C4B16B70063BAD6 /* XCRemoteSwiftPackageReference "zxcvbn-swift" */;
+			productName = zxcvbn;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D5C32C002C4B14B30063BAD6 /* Project object */;
 }
