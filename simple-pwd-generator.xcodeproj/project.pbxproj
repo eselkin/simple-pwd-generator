@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D526B8A32C533F7100C78350 /* info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D526B8A22C533F6D00C78350 /* info.plist */; };
 		D5BA543D2C52FF9A007CF165 /* zxcvbn in Frameworks */ = {isa = PBXBuildFile; productRef = D5BA543C2C52FF9A007CF165 /* zxcvbn */; };
 		D5BA543F2C52FFA4007CF165 /* zxcvbn in Frameworks */ = {isa = PBXBuildFile; productRef = D5BA543E2C52FFA4007CF165 /* zxcvbn */; };
 		D5BA54412C52FFB2007CF165 /* zxcvbn in Frameworks */ = {isa = PBXBuildFile; productRef = D5BA54402C52FFB2007CF165 /* zxcvbn */; };
@@ -30,6 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D526B8A22C533F6D00C78350 /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = info.plist; sourceTree = "<group>"; };
 		D5C32C082C4B14B30063BAD6 /* simple-pwd-generator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "simple-pwd-generator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5C32C1A2C4B14B60063BAD6 /* simple-pwd-generatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "simple-pwd-generatorTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5C32C242C4B14B60063BAD6 /* simple-pwd-generatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "simple-pwd-generatorUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,6 +91,7 @@
 		D5C32BFF2C4B14B30063BAD6 = {
 			isa = PBXGroup;
 			children = (
+				D526B8A22C533F6D00C78350 /* info.plist */,
 				D5C32C0A2C4B14B30063BAD6 /* simple-pwd-generator */,
 				D5C32C1D2C4B14B60063BAD6 /* simple-pwd-generatorTests */,
 				D5C32C272C4B14B60063BAD6 /* simple-pwd-generatorUITests */,
@@ -231,6 +234,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D526B8A32C533F7100C78350 /* info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
