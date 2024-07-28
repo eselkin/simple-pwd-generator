@@ -10,40 +10,46 @@ import SwiftUI
 import zxcvbn
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var GeneratedPassword: [PasswordItem]
-    @State private var passwordType: PASSWORD_TYPE? = nil
+    // State stored to AppStorage between uses
+    @AppStorage("pwpasswordType") private var passwordType: PASSWORD_TYPE =
+        .unselected
+    @AppStorage("pwincludeLC") private var includeLC: Bool = false
+    @AppStorage("pwincludeUC") private var includeUC: Bool = false
+    @AppStorage("pwincludeNC") private var includeNC: Bool = false
+    @AppStorage("pwincludeSC") private var includeSC: Bool = false
+    @AppStorage("pwspecial") private var special = "!.,@"
+    @AppStorage("pwlength") private var length = 0
+    @AppStorage("pwmin") private var min = 1
+    @AppStorage("pwseparator") private var separator: PASSWORD_SEPARATOR = .none
+    @AppStorage("pwminwordlength") private var minWordLength: Int = 6
 
-    @State private var includeLC: Bool = false
-    @State private var includeUC: Bool = false
-    @State private var includeNC: Bool = false
-    @State private var includeSC: Bool = false
-    @State private var special = "!.,@"
-    @State private var length = 0
-    @State private var min = 1
+    // Password and ZXCVBN output - not stored in AppStorage. You can copy the result to the clipboard, but it is not stored between uses
     @State private var generatedPassword = ""
-    @State private var separator: PASSWORD_SEPARATOR = .none
-    @State private var minWordLength: Int? = nil
+    @State private var result: MostGuessableMatchSequenceResult? = nil
+
+    // State variables not stored
     @State private var errorMessage = ""
     @State private var showError = false
-    @State private var result: MostGuessableMatchSequenceResult? = nil
     @State private var copiedMsg: String = "Password copied to clipboard"
     @State private var showCopied: Bool = false
     @State private var timer: Timer?
 
-    private func delayText() async {
-        // Delay of 7.5 seconds (1 second = 1_000_000_000 nanoseconds)
-        showCopied = true
-        try? await Task.sleep(nanoseconds: 2_500_000_000)
-        showCopied = false
-    }
-
-    private func changeMin(_ includeBool: Bool) {
-        if includeBool {
-            min += 1
-        } else {
-            min -= 1
+    // This is a convenience method to update the minimum shown in the picker wheel
+    private func setMin() {
+        var tempmin = 1
+        if includeLC {
+            tempmin += 1
         }
+        if includeNC {
+            tempmin += 1
+        }
+        if includeSC {
+            tempmin += 1
+        }
+        if includeUC {
+            tempmin += 1
+        }
+        min = tempmin
     }
     private func generate() {
         showError = false
@@ -63,16 +69,15 @@ struct ContentView: View {
             toInclude.append(.special)
             specialToInc = special
         }
-        if let pwType = passwordType {
-            debugPrint(separator)
+        if passwordType != .unselected {
             do {
                 generatedPassword = try password_gen(
                     characters_to_include: toInclude,
-                    special_to_include: specialToInc, password_type: pwType,
+                    special_to_include: specialToInc,
+                    password_type: passwordType,
                     length: length, separator: separator,
                     minWordLength: minWordLength)
                 result = zxcvbn(generatedPassword)
-                debugPrint(result)
             } catch PasswordCreationError
                 .couldNotFindIndexOfMostFrequentCharacterType
             {
@@ -96,6 +101,7 @@ struct ContentView: View {
             Section(header: Text("Password generation")) {
                 Picker("Type of password generation", selection: $passwordType)
                 {
+                    Text("Select a type").tag(PASSWORD_TYPE.unselected)
                     Text("Random character").tag(
                         PASSWORD_TYPE.random_characters)
                     Text("Words").tag(PASSWORD_TYPE.words)
@@ -103,30 +109,45 @@ struct ContentView: View {
                     if passwordType == .random_characters {
                         length = 12
                         separator = .none
-                        minWordLength = nil
-                    } else {
-                        min = 1
+                        minWordLength = 6
+                    } else if passwordType == .words {
+                        min = 4
                         length = 4
                         minWordLength = 6
                         separator = .random
-                        includeLC = false
-                        includeNC = false
-                        includeSC = false
-                        includeUC = false
-                        
+                        includeLC = true
+                        includeNC = true
+                        includeSC = true
+                        includeUC = true
+                    } else {
+                        // selected none
+                        length = 4
+                        includeLC = true
+                        includeNC = true
+                        includeSC = true
+                        includeUC = true
+                        separator = .underscore
+                        minWordLength = 6
                     }
                 }
 
                 if passwordType == .random_characters {
                     Toggle("Include lowercase letters", isOn: $includeLC)
-                        .onChange(of: includeLC, perform: changeMin)
+                        .onChange(of: includeLC) {
+                            setMin()
+                        }
                     Toggle("Include uppercase letters", isOn: $includeUC)
-                        .onChange(of: includeUC, perform: changeMin)
+                        .onChange(of: includeUC) { setMin() }
                     Toggle("Include numbers", isOn: $includeNC).onChange(
-                        of: includeNC, perform: changeMin
-                    )
+                        of: includeNC) {
+                            setMin()
+                        }
                     Toggle("Include special characters", isOn: $includeSC)
-                        .onChange(of: includeSC, perform: changeMin)
+                        .onChange(of: includeSC){
+                            setMin()
+                        }
+
+                    // special characters requires the provision of a string of characters to choose from
                     if includeSC {
                         LabeledContent {
                             TextField("", text: $special)
@@ -135,51 +156,44 @@ struct ContentView: View {
                         }
                     }
                 } else if passwordType == .words {
-                    LabeledContent {
-                        Picker("", selection: $minWordLength) {
-                            ForEach(6..<50) { i in
+                    // word specific form options. 6-50 word length, which is arbitrary. Once you go over 15 in the english language dictionary, there are too few options to choose from so the function will display an error.
+
+                    Picker("Minimum word length", selection: $minWordLength) {
+                        ForEach(6..<50) { i in
+                            Text(String(i)).tag(i)
+                        }
+                    }
+
+                }
+                if passwordType != .unselected {
+
+                    Picker("Length of password", selection: $length) {
+                        ForEach(1..<200) { i in
+                            if i >= min {
                                 Text(String(i)).tag(i)
                             }
                         }
-                    } label: {
-                        Text("Minimum word length")
-
                     }
-                }
-                if passwordType != nil {
-                    LabeledContent {
-                        Picker("", selection: $length) {
-                            ForEach(1..<200) { i in
-                                if i >= min {
-                                    Text(String(i)).tag(i).disabled(i <= min)
-                                }
-                            }
+
+                    Picker("Separator", selection: $separator) {
+                        Text("none").tag(PASSWORD_SEPARATOR.none)
+                        Text("underscore").tag(
+                            PASSWORD_SEPARATOR.underscore)
+                        Text("comma").tag(PASSWORD_SEPARATOR.comma)
+                        Text("dash").tag(PASSWORD_SEPARATOR.dash)
+                        Text("random separator").tag(
+                            PASSWORD_SEPARATOR.random)
+                    }
+
+                    if passwordType != .unselected {
+                        Button(
+                            "Generate", systemImage: "plus.circle.fill",
+                            action: generate
+                        ).buttonStyle(.automatic).alert(
+                            isPresented: $showError
+                        ) {
+                            Alert(title: Text(errorMessage))
                         }
-                    } label: {
-                        Text("Length of password")
-                    }
-
-                    LabeledContent {
-                        Picker("", selection: $separator) {
-                            Text("none").tag(PASSWORD_SEPARATOR.none)
-                            Text("underscore").tag(
-                                PASSWORD_SEPARATOR.underscore)
-                            Text("comma").tag(PASSWORD_SEPARATOR.comma)
-                            Text("dash").tag(PASSWORD_SEPARATOR.dash)
-                            Text("random separator").tag(
-                                PASSWORD_SEPARATOR.random)
-                        }
-                    } label: {
-                        Text("Separator")
-                    }
-
-                    Button(
-                        "Generate", systemImage: "plus.circle.fill",
-                        action: generate
-                    ).buttonStyle(.automatic).alert(
-                        isPresented: $showError
-                    ) {
-                        Alert(title: Text(errorMessage))
                     }
                 }
             }
@@ -252,5 +266,4 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: PasswordItem.self, inMemory: true)
 }

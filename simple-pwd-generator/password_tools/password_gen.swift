@@ -12,18 +12,19 @@ var LOWERCASE = "abcdefghijklmnopqrstuvwxyz"
 var UPPERCASE = LOWERCASE.uppercased()
 var SEPARATORS = "_-,."
 
-enum PASSWORD_CHARACTER_INCLUDES {
+enum PASSWORD_CHARACTER_INCLUDES: String, CaseIterable {
     case special
     case uppercase
     case lowercase
     case number
 }
 
-enum PASSWORD_TYPE {
+enum PASSWORD_TYPE: String, CaseIterable {
+    case unselected
     case random_characters
     case words
 }
-enum PASSWORD_SEPARATOR {
+enum PASSWORD_SEPARATOR: String, CaseIterable {
     case none
     case underscore
     case dash
@@ -125,7 +126,7 @@ func password_gen(
     {
         throw PasswordCreationError.tooManyConstraints
     }
-    
+
     if password_type == .random_characters && characters_to_include.count == 0 {
         throw PasswordCreationError.mustSelectAtLeastOneCharacterType
     }
