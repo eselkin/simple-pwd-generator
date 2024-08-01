@@ -119,7 +119,6 @@ func password_gen(
     separator: PASSWORD_SEPARATOR,
     minWordLength: Int?
 ) throws -> String {
-
     // If password is random characters and the number of characters to include is less than the length of the required type of characters, throw an error. This is a shortcut failure, since the system wouldn't succeed even if this condition were not here.
     if password_type == .random_characters
         && length < characters_to_include.count
@@ -176,9 +175,11 @@ func password_gen(
         }
     }
     var missing_char_types = [PASSWORD_CHARACTER_INCLUDES]()
-    for (key, value) in hasChar {
-        if value == 0 {
-            missing_char_types.append(key)
+    if password_type == .random_characters {
+        for (key, value) in hasChar {
+            if value == 0 {
+                missing_char_types.append(key)
+            }
         }
     }
 

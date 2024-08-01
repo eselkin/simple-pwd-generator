@@ -33,6 +33,7 @@ struct ContentView: View {
     @State private var copiedMsg: String = "Password copied to clipboard"
     @State private var showCopied: Bool = false
     @State private var timer: Timer?
+    @State private var showRefreshAlert = false
 
     // This is a convenience method to update the minimum shown in the picker wheel
     private func setMin() {
@@ -52,6 +53,7 @@ struct ContentView: View {
         min = tempmin
     }
     private func generate() {
+        
         showError = false
         errorMessage = ""
         var toInclude: [PASSWORD_CHARACTER_INCLUDES] = []
@@ -89,6 +91,10 @@ struct ContentView: View {
                 showError = true
             } catch PasswordCreationError.tooFewWordsToSelectFrom {
                 errorMessage = "Try reducing the minimum word length"
+                showError = true
+            } catch PasswordCreationError.tooManyConstraints {
+                errorMessage =
+                    "Too many constraints, try reducing the number of words"
                 showError = true
             } catch {
                 errorMessage = "Something happened, try again"
@@ -139,11 +145,12 @@ struct ContentView: View {
                     Toggle("Include uppercase letters", isOn: $includeUC)
                         .onChange(of: includeUC) { setMin() }
                     Toggle("Include numbers", isOn: $includeNC).onChange(
-                        of: includeNC) {
-                            setMin()
-                        }
+                        of: includeNC
+                    ) {
+                        setMin()
+                    }
                     Toggle("Include special characters", isOn: $includeSC)
-                        .onChange(of: includeSC){
+                        .onChange(of: includeSC) {
                             setMin()
                         }
 
@@ -260,6 +267,19 @@ struct ContentView: View {
                     }
                 }
             }
+        }.refreshable {
+            passwordType = .unselected
+            includeLC = true
+            includeNC = true
+            includeUC = true
+            includeSC = true
+            length = 12
+            minWordLength = 6
+            min = 5
+            showRefreshAlert = false
+            special = ""
+            generatedPassword = ""
+            result = nil
         }
     }
 }
