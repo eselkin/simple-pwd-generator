@@ -38,6 +38,7 @@ enum PasswordCreationError: Error {
     case couldNotFindIndexOfMostFrequentCharacterType
     case tooFewWordsToSelectFrom
     case mustSelectAtLeastOneCharacterType
+    case includesSCButEmpty
 }
 
 func random_character(
@@ -83,7 +84,6 @@ func removeChar(
     { acc, el in
         acc[el.key] = el.value
     }
-
     if let (lt, lv) = largest {
         if lv <= 1 {
             throw PasswordCreationError.tooManyConstraints
@@ -134,6 +134,10 @@ func password_gen(
     var hasChar = [PASSWORD_CHARACTER_INCLUDES: Int]()
     for charType in characters_to_include {
         hasChar[charType] = 0
+    }
+
+    if hasChar[.special] == 0 && special_to_include.isEmpty {
+        throw PasswordCreationError.includesSCButEmpty
     }
 
     // We use a String array to hold chosen password characters until joining them at the end.

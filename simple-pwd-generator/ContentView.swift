@@ -96,7 +96,12 @@ struct ContentView: View {
                 errorMessage =
                     "Too many constraints, try reducing the number of words"
                 showError = true
-            } catch {
+            } catch PasswordCreationError.includesSCButEmpty {
+                errorMessage =
+                    "Include special characters to check is checked but list is empty. Add some special characters."
+                showError = true
+            }
+            catch {
                 errorMessage = "Something happened, try again"
                 showError = true
             }
