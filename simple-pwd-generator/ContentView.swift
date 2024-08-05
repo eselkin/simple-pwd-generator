@@ -13,11 +13,11 @@ struct ContentView: View {
     // State stored to AppStorage between uses
     @AppStorage("pwpasswordType") private var passwordType: PASSWORD_TYPE =
         .unselected
-    @AppStorage("pwincludeLC") private var includeLC: Bool = false
-    @AppStorage("pwincludeUC") private var includeUC: Bool = false
-    @AppStorage("pwincludeNC") private var includeNC: Bool = false
-    @AppStorage("pwincludeSC") private var includeSC: Bool = false
-    @AppStorage("pwspecial") private var special = "!.,@"
+    @AppStorage("pwincludeLC") private var includeLC: Bool = true
+    @AppStorage("pwincludeUC") private var includeUC: Bool = true
+    @AppStorage("pwincludeNC") private var includeNC: Bool = true
+    @AppStorage("pwincludeSC") private var includeSC: Bool = true
+    @AppStorage("pwspecial") private var special = "!.,@#$%*?-_"
     @AppStorage("pwlength") private var length = 0
     @AppStorage("pwmin") private var min = 1
     @AppStorage("pwseparator") private var separator: PASSWORD_SEPARATOR = .none
@@ -118,9 +118,14 @@ struct ContentView: View {
                     Text("Words").tag(PASSWORD_TYPE.words)
                 }.onChange(of: passwordType) {
                     if passwordType == .random_characters {
-                        length = 12
+                        length = 20
                         separator = .none
                         minWordLength = 6
+                        special = "!.,@#$%*?-_"
+                        includeLC = true
+                        includeNC = true
+                        includeSC = true
+                        includeUC = true
                     } else if passwordType == .words {
                         min = 4
                         length = 4
