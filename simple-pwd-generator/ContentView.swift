@@ -283,11 +283,11 @@ struct ContentView: View {
             includeNC = true
             includeUC = true
             includeSC = true
-            length = 12
+            length = 20
             minWordLength = 6
             min = 5
             showRefreshAlert = false
-            special = ""
+            special = "!.,@#$%*?-_"
             generatedPassword = ""
             result = nil
         }
