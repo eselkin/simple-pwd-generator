@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D5BA543D2C52FF9A007CF165 /* zxcvbn in Frameworks */ = {isa = PBXBuildFile; productRef = D5BA543C2C52FF9A007CF165 /* zxcvbn */; };
-		D5BA543F2C52FFA4007CF165 /* zxcvbn in Frameworks */ = {isa = PBXBuildFile; productRef = D5BA543E2C52FFA4007CF165 /* zxcvbn */; };
-		D5BA54412C52FFB2007CF165 /* zxcvbn in Frameworks */ = {isa = PBXBuildFile; productRef = D5BA54402C52FFB2007CF165 /* zxcvbn */; };
+		D52B37172C66FE7700B1FDE9 /* zxcvbn in Frameworks */ = {isa = PBXBuildFile; productRef = D52B37162C66FE7700B1FDE9 /* zxcvbn */; };
+		D52B37192C66FE9100B1FDE9 /* zxcvbn in Frameworks */ = {isa = PBXBuildFile; productRef = D52B37182C66FE9100B1FDE9 /* zxcvbn */; };
+		D577AFBA2C66FFDA00B135E8 /* zxcvbn in Frameworks */ = {isa = PBXBuildFile; productRef = D577AFB92C66FFDA00B135E8 /* zxcvbn */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +40,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				password_tools/en.txt,
+				password_tools/es.txt,
 			);
 			target = D5C32C192C4B14B60063BAD6 /* simple-pwd-generatorTests */;
 		};
@@ -47,6 +48,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				password_tools/en.txt,
+				password_tools/es.txt,
 			);
 			target = D5C32C232C4B14B60063BAD6 /* simple-pwd-generatorUITests */;
 		};
@@ -63,7 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5BA543D2C52FF9A007CF165 /* zxcvbn in Frameworks */,
+				D52B37172C66FE7700B1FDE9 /* zxcvbn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,7 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5BA543F2C52FFA4007CF165 /* zxcvbn in Frameworks */,
+				D52B37192C66FE9100B1FDE9 /* zxcvbn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,7 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5BA54412C52FFB2007CF165 /* zxcvbn in Frameworks */,
+				D577AFBA2C66FFDA00B135E8 /* zxcvbn in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,7 +128,7 @@
 			);
 			name = "simple-pwd-generator";
 			packageProductDependencies = (
-				D5BA543C2C52FF9A007CF165 /* zxcvbn */,
+				D52B37162C66FE7700B1FDE9 /* zxcvbn */,
 			);
 			productName = "simple-pwd-generator";
 			productReference = D5C32C082C4B14B30063BAD6 /* simple-pwd-generator.app */;
@@ -150,7 +152,7 @@
 			);
 			name = "simple-pwd-generatorTests";
 			packageProductDependencies = (
-				D5BA543E2C52FFA4007CF165 /* zxcvbn */,
+				D52B37182C66FE9100B1FDE9 /* zxcvbn */,
 			);
 			productName = "simple-pwd-generatorTests";
 			productReference = D5C32C1A2C4B14B60063BAD6 /* simple-pwd-generatorTests.xctest */;
@@ -174,7 +176,7 @@
 			);
 			name = "simple-pwd-generatorUITests";
 			packageProductDependencies = (
-				D5BA54402C52FFB2007CF165 /* zxcvbn */,
+				D577AFB92C66FFDA00B135E8 /* zxcvbn */,
 			);
 			productName = "simple-pwd-generatorUITests";
 			productReference = D5C32C242C4B14B60063BAD6 /* simple-pwd-generatorUITests.xctest */;
@@ -512,6 +514,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CNKFCAS44G;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.eliselkin.simple-pwd-generatorUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -529,6 +532,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CNKFCAS44G;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.eliselkin.simple-pwd-generatorUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -592,19 +596,18 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D5BA543C2C52FF9A007CF165 /* zxcvbn */ = {
+		D52B37162C66FE7700B1FDE9 /* zxcvbn */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D5C32C382C4B16B70063BAD6 /* XCRemoteSwiftPackageReference "zxcvbn-swift" */;
 			productName = zxcvbn;
 		};
-		D5BA543E2C52FFA4007CF165 /* zxcvbn */ = {
+		D52B37182C66FE9100B1FDE9 /* zxcvbn */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D5C32C382C4B16B70063BAD6 /* XCRemoteSwiftPackageReference "zxcvbn-swift" */;
 			productName = zxcvbn;
 		};
-		D5BA54402C52FFB2007CF165 /* zxcvbn */ = {
+		D577AFB92C66FFDA00B135E8 /* zxcvbn */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D5C32C382C4B16B70063BAD6 /* XCRemoteSwiftPackageReference "zxcvbn-swift" */;
 			productName = zxcvbn;
 		};
 /* End XCSwiftPackageProductDependency section */

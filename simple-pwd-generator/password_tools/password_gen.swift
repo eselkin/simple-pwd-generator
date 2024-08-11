@@ -117,7 +117,11 @@ func password_gen(
     password_type: PASSWORD_TYPE,
     length: Int,
     separator: PASSWORD_SEPARATOR,
-    minWordLength: Int?
+    separatorEvery: Int,
+    dictionaries: Dictionaries,
+    minWordLength: Int?,
+    maxWordLength: Int?,
+    dictionariesToUse: [String]?
 ) throws -> String {
     // If password is random characters and the number of characters to include is less than the length of the required type of characters, throw an error. This is a shortcut failure, since the system wouldn't succeed even if this condition were not here.
     if password_type == .random_characters
@@ -143,19 +147,34 @@ func password_gen(
     // We use a String array to hold chosen password characters until joining them at the end.
     var password: [String] = []
 
-    var englishFiltered: [String.SubSequence] = []
+    var wordlistFiltered: [String.SubSequence] = []
     if password_type == .words {
-        let dictionaries = Dictionaries()
         var min = 1
         if minWordLength != nil {
             min = minWordLength!
         }
-        englishFiltered = dictionaries.english.filter { word in
-            word.count > min
+        var max = 100
+        if maxWordLength != nil {
+            max = maxWordLength!
         }
-        if englishFiltered.count < 2000 {
+        if let dictionariesToUseEx = dictionariesToUse {
+            debugPrint(dictionariesToUseEx)
+            if (dictionariesToUseEx.contains("English")) {
+                wordlistFiltered = dictionaries.english.filter { word in
+                    word.count > min && word.count < max
+                }
+            }
+            if dictionariesToUseEx.contains("Spanish") {
+                let spanishWords = dictionaries.spanish.filter{ word in
+                    word.count > min && word.count < max
+                }
+                wordlistFiltered.append(contentsOf: spanishWords)
+            }
+        }
+        if wordlistFiltered.count < 1000 {
             throw PasswordCreationError.tooFewWordsToSelectFrom
         }
+        wordlistFiltered.shuffle()
     }
     for _ in 0..<length {
         if password_type == .random_characters {
@@ -173,7 +192,7 @@ func password_gen(
             }
             password.append(random_selection)
         } else if password_type == .words {
-            if let word = englishFiltered.randomElement() {
+            if let word = wordlistFiltered.randomElement() {
                 password.append(String(word))
             }
         }
@@ -186,45 +205,35 @@ func password_gen(
             }
         }
     }
-
-    while missing_char_types.count > 0 {
+    for missing_char_type in missing_char_types {
         let new_random_sel = random_character(
-            characters_to_include: missing_char_types,
+            characters_to_include: [missing_char_type],
             special_to_include: special_to_include)
-        if NUMBERS.contains(new_random_sel) {
-            missing_char_types = missing_char_types.filter { mct in
-                mct != .number
-            }
-        } else if UPPERCASE.contains(new_random_sel) {
-            missing_char_types = missing_char_types.filter { mct in
-                mct != .uppercase
-            }
-        } else if LOWERCASE.contains(new_random_sel) {
-            missing_char_types = missing_char_types.filter { mct in
-                mct != .lowercase
-            }
-        } else if special_to_include.contains(new_random_sel) {
-            missing_char_types = missing_char_types.filter { mct in
-                mct != .special
-            }
-        }
         (hasChar, password, _) = try removeChar(
             hasChar: hasChar, password: password, special: special_to_include)
         password.append(new_random_sel)
     }
-
-    if separator == .dash {
-        return password.joined(separator: "-")
-    } else if separator == .underscore {
-        return password.joined(separator: "_")
-    } else if separator == .comma {
-        return password.joined(separator: ",")
-    } else if separator == .period {
-        return password.joined(separator: ".")
-    } else if separator == .random {
-        return password.joined(separator: String(SEPARATORS.randomElement()!))
-    } else {
-        return password.joined(separator: "")
+    
+    var separatedPassword = [String]()
+    
+    for i in 0..<password.count{
+        if (i > 1 || (i > 0 && password_type == .words)) && (i).isMultiple(of: separatorEvery) {
+            if separator == .dash {
+                separatedPassword.append("-")
+            } else if separator == .underscore {
+                separatedPassword.append("_")
+            } else if separator == .comma {
+                separatedPassword.append(",")
+            } else if separator == .period {
+                separatedPassword.append(".")
+            } else if separator == .random {
+                separatedPassword.append(String(SEPARATORS.randomElement()!))
+            } else {
+                return password.joined(separator: "")
+            }
+        }
+        separatedPassword.append(password[i])
     }
-
+    
+    return separatedPassword.joined()
 }
