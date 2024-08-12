@@ -14,7 +14,7 @@ import Testing
 struct subcomponentTests {
     @Test func testDictionaryCreation() async {
         let dictionaries = Dictionaries()
-        #expect(dictionaries.english.count == 274926)
+        #expect(dictionaries.english.count == 42592)
     }
     @Test func randomCharacterWithNumber() async throws {
         let randomchar = random_character(
@@ -118,7 +118,10 @@ struct completePasswordTests {
         let generatedPassword = try password_gen(
             characters_to_include: [], special_to_include: "",
             password_type: .words, length: 3, separator: .underscore,
-            minWordLength: 8)
+            separatorEvery: 1,
+            dictionaries: dictionaries,
+            minWordLength: 8, maxWordLength: 10,
+            dictionariesToUse: ["English"])
         let regex = try NSRegularExpression(
             pattern: "[a-zA-Z]{8,}[_][a-zA-Z]{8,}[_][a-zA-Z]{8,}")
         #expect(
@@ -129,7 +132,10 @@ struct completePasswordTests {
     @Test func fourWordPasswordSepDashMinWordLength9() async throws {
         let generatedPassword = try password_gen(
             characters_to_include: [], special_to_include: "",
-            password_type: .words, length: 4, separator: .dash, minWordLength: 9
+            password_type: .words, length: 4, separator: .dash, separatorEvery: 1,
+            dictionaries: dictionaries,
+            minWordLength: 9, maxWordLength: 12,
+            dictionariesToUse: ["English"]
         )
         let regex = try NSRegularExpression(
             pattern: "[a-zA-Z]{9,}[-][a-zA-Z]{9,}[-][a-zA-Z]{9,}[-][a-zA-Z]{9,}"
@@ -143,7 +149,10 @@ struct completePasswordTests {
         let generatedPassword = try password_gen(
             characters_to_include: [], special_to_include: "",
             password_type: .words, length: 3, separator: .comma,
-            minWordLength: 10)
+            separatorEvery: 1,
+            dictionaries: dictionaries,
+            minWordLength: 10, maxWordLength: 12,
+            dictionariesToUse: ["English"])
         let regex = try NSRegularExpression(
             pattern: "[a-zA-Z]{10,}[,][a-zA-Z]{10,}[,][a-zA-Z]{10,}")
         #expect(
@@ -155,7 +164,10 @@ struct completePasswordTests {
         let generatedPassword = try password_gen(
             characters_to_include: [], special_to_include: "",
             password_type: .words, length: 3, separator: .period,
-            minWordLength: 12)
+            separatorEvery: 1,
+            dictionaries: dictionaries,
+            minWordLength: 12, maxWordLength: 14,
+            dictionariesToUse: ["English"])
         let regex = try NSRegularExpression(
             pattern: "[a-zA-Z]{12,}[.][a-zA-Z]{12,}[.][a-zA-Z]{12,}")
         #expect(
@@ -167,8 +179,11 @@ struct completePasswordTests {
         let generatedPassword = try password_gen(
             characters_to_include: [.lowercase], special_to_include: "!",
             password_type: .random_characters, length: 3, separator: .period,
-            minWordLength: nil)
-        let regex = try NSRegularExpression(pattern: "[a-z][.][a-z][.][a-z]")
+            separatorEvery: 1,
+            dictionaries: dictionaries,
+            minWordLength: nil, maxWordLength: nil,
+            dictionariesToUse: nil)
+        let regex = try NSRegularExpression(pattern: "^[a-z][.][a-z][.][a-z]$")
         #expect(
             regex.firstMatch(
                 in: generatedPassword, options: [],
@@ -178,7 +193,11 @@ struct completePasswordTests {
         let generatedPassword = try password_gen(
             characters_to_include: [.special], special_to_include: "!,",
             password_type: .random_characters, length: 3, separator: .period,
-            minWordLength: nil)
+            separatorEvery: 1,
+            dictionaries: dictionaries,
+            minWordLength: nil, maxWordLength: nil,
+            dictionariesToUse: nil
+        )
         let regex = try NSRegularExpression(pattern: "[!,][.][,!][.][,!]")
         #expect(
             regex.firstMatch(
@@ -189,7 +208,11 @@ struct completePasswordTests {
         let generatedPassword = try password_gen(
             characters_to_include: [.uppercase], special_to_include: "!,",
             password_type: .random_characters, length: 3, separator: .period,
-            minWordLength: nil)
+            separatorEvery: 1,
+            dictionaries: dictionaries,
+            minWordLength: nil, maxWordLength: nil,
+            dictionariesToUse: nil
+        )
         let regex = try NSRegularExpression(pattern: "[A-Z][.][A-Z][.][A-Z]")
         #expect(
             regex.firstMatch(
@@ -200,8 +223,12 @@ struct completePasswordTests {
         let generatedPassword = try password_gen(
             characters_to_include: [.uppercase, .lowercase, .number, .special], special_to_include: "!",
             password_type: .random_characters, length: 5, separator: .random,
-            minWordLength: nil)
-        let regex = try NSRegularExpression(pattern: ".*[,._-].*[,._-].*")
+            separatorEvery: 1,
+            dictionaries: dictionaries,
+            minWordLength: nil, maxWordLength: nil,
+            dictionariesToUse: nil
+        )
+        let regex = try NSRegularExpression(pattern: ".*[,._!?*-].*[,._!?*-].*")
         #expect(
             regex.firstMatch(
                 in: generatedPassword, options: [],
@@ -212,7 +239,12 @@ struct completePasswordTests {
         let generatedPassword = try password_gen(
             characters_to_include: [.uppercase, .lowercase],
             special_to_include: ".,!", password_type: .random_characters,
-            length: 10, separator: .none, minWordLength: nil)
+            length: 10, separator: .none,
+            separatorEvery: 1,
+            dictionaries: dictionaries,
+            minWordLength: nil, maxWordLength: nil,
+            dictionariesToUse: nil
+        )
         let regex = try NSRegularExpression(pattern: "^[a-zA-Z]{10}$")
         #expect(
             regex.firstMatch(
@@ -223,7 +255,12 @@ struct completePasswordTests {
         let generatedPassword = try password_gen(
             characters_to_include: [.uppercase, .lowercase, .number, .special],
             special_to_include: ".,!", password_type: .random_characters,
-            length: 20, separator: .none, minWordLength: nil)
+            length: 20, separator: .none,
+            separatorEvery: 1,
+            dictionaries: dictionaries,
+            minWordLength: nil, maxWordLength: nil,
+            dictionariesToUse: nil
+        )
         let regex = try NSRegularExpression(pattern: "^[a-zA-Z0-9.,!]{20}$")
         #expect(
             regex.firstMatch(
@@ -239,7 +276,12 @@ struct completePasswordTests {
                         .uppercase, .lowercase, .number, .special,
                     ], special_to_include: ".,!",
                     password_type: .random_characters, length: 3,
-                    separator: .none, minWordLength: nil)
+                    separator: .none,
+                    separatorEvery: 1,
+                    dictionaries: dictionaries,
+                    minWordLength: nil, maxWordLength: nil,
+                    dictionariesToUse: nil
+                )
             }
         }
     }
@@ -248,7 +290,11 @@ struct completePasswordTests {
             try password_gen(
                 characters_to_include: [], special_to_include: "",
                 password_type: .words, length: 3,
-                separator: .none, minWordLength: 50)
+                separator: .none,
+                separatorEvery: 1,
+                dictionaries: dictionaries,
+                minWordLength: 50, maxWordLength: 100,
+                dictionariesToUse: ["English"])
         }
     }
 }

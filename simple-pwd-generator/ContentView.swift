@@ -257,10 +257,14 @@ struct ContentView: View {
                             
                             Picker("Separator", selection: $separator) {
                                 Text("none").tag(PASSWORD_SEPARATOR.none)
-                                Text("underscore").tag(
+                                Text("underscore (_)").tag(
                                     PASSWORD_SEPARATOR.underscore)
-                                Text("comma").tag(PASSWORD_SEPARATOR.comma)
-                                Text("dash").tag(PASSWORD_SEPARATOR.dash)
+                                Text("comma (,)").tag(PASSWORD_SEPARATOR.comma)
+                                Text("dash (-)").tag(PASSWORD_SEPARATOR.dash)
+                                Text("exclamation mark (!)").tag(PASSWORD_SEPARATOR.exclamation)
+                                Text("question mark (?)").tag(PASSWORD_SEPARATOR.questionmark)
+                                Text("asterisk (*)").tag(PASSWORD_SEPARATOR.asterisk)
+                                Text("period (.)").tag(PASSWORD_SEPARATOR.period)
                                 Text("random separator").tag(
                                     PASSWORD_SEPARATOR.random)
                             }

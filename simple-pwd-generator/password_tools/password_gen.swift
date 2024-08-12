@@ -10,7 +10,7 @@ import Foundation
 var NUMBERS = "0123456789"
 var LOWERCASE = "abcdefghijklmnopqrstuvwxyz"
 var UPPERCASE = LOWERCASE.uppercased()
-var SEPARATORS = "_-,."
+var SEPARATORS = "_-,.!*"
 
 enum PASSWORD_CHARACTER_INCLUDES: String, CaseIterable {
     case special
@@ -30,6 +30,9 @@ enum PASSWORD_SEPARATOR: String, CaseIterable {
     case dash
     case comma
     case period
+    case asterisk
+    case exclamation
+    case questionmark
     case random
 }
 
@@ -159,13 +162,13 @@ func password_gen(
         }
         if let dictionariesToUseEx = dictionariesToUse {
             debugPrint(dictionariesToUseEx)
-            if (dictionariesToUseEx.contains("English")) {
+            if dictionariesToUseEx.contains("English") {
                 wordlistFiltered = dictionaries.english.filter { word in
                     word.count > min && word.count < max
                 }
             }
             if dictionariesToUseEx.contains("Spanish") {
-                let spanishWords = dictionaries.spanish.filter{ word in
+                let spanishWords = dictionaries.spanish.filter { word in
                     word.count > min && word.count < max
                 }
                 wordlistFiltered.append(contentsOf: spanishWords)
@@ -213,27 +216,45 @@ func password_gen(
             hasChar: hasChar, password: password, special: special_to_include)
         password.append(new_random_sel)
     }
-    
+
     var separatedPassword = [String]()
-    
-    for i in 0..<password.count{
-        if (i > 1 || (i > 0 && password_type == .words)) && (i).isMultiple(of: separatorEvery) {
-            if separator == .dash {
+
+    for i in 0..<password.count {
+        if (i > 0 || (i > 0 && password_type == .words))
+            && (i).isMultiple(of: separatorEvery)
+        {
+            switch separator {
+            case .dash:
                 separatedPassword.append("-")
-            } else if separator == .underscore {
-                separatedPassword.append("_")
-            } else if separator == .comma {
+                break
+            case .asterisk:
+                separatedPassword.append("*")
+                break
+            case .comma:
                 separatedPassword.append(",")
-            } else if separator == .period {
+                break
+            case .exclamation:
+                separatedPassword.append("!")
+                break
+            case .period:
                 separatedPassword.append(".")
-            } else if separator == .random {
+                break
+            case .questionmark:
+                separatedPassword.append("?")
+                break
+            case .underscore:
+                separatedPassword.append("_")
+                break
+            case .random:
                 separatedPassword.append(String(SEPARATORS.randomElement()!))
-            } else {
-                return password.joined(separator: "")
+                break
+            default:
+                separatedPassword.append("")
             }
+
         }
         separatedPassword.append(password[i])
     }
-    
+
     return separatedPassword.joined()
 }
