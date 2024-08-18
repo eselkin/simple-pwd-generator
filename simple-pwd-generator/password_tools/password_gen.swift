@@ -10,7 +10,7 @@ import Foundation
 var NUMBERS = "0123456789"
 var LOWERCASE = "abcdefghijklmnopqrstuvwxyz"
 var UPPERCASE = LOWERCASE.uppercased()
-var SEPARATORS = "_-,.!*"
+var SEPARATORS = "_-,.!*?"
 
 enum PASSWORD_CHARACTER_INCLUDES: String, CaseIterable {
     case special
