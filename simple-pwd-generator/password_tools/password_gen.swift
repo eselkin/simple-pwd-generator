@@ -7,9 +7,20 @@
 
 import Foundation
 
+var DIFFICULT_TO_DISTINGUISH="01OIloQSs5"
 var NUMBERS = "0123456789"
+var NUMBERS_EASY_TO_DISTINGUISH = NUMBERS.filter {
+    !DIFFICULT_TO_DISTINGUISH.contains($0)
+}
 var LOWERCASE = "abcdefghijklmnopqrstuvwxyz"
+var LOWERCASE_EASY_TO_DISTINGUISH = LOWERCASE.filter {
+    !DIFFICULT_TO_DISTINGUISH.contains($0)
+}
 var UPPERCASE = LOWERCASE.uppercased()
+var UPPERCASE_EASY_TO_DISTINGUISH = LOWERCASE.uppercased().filter {
+    !DIFFICULT_TO_DISTINGUISH.contains($0)
+}
+
 var SEPARATORS = "_-,.!*?"
 
 enum PASSWORD_CHARACTER_INCLUDES: String, CaseIterable {
@@ -24,6 +35,7 @@ enum PASSWORD_TYPE: String, CaseIterable {
     case random_characters
     case words
 }
+
 enum PASSWORD_SEPARATOR: String, CaseIterable {
     case none
     case underscore
@@ -42,36 +54,39 @@ enum PasswordCreationError: Error {
     case tooFewWordsToSelectFrom
     case mustSelectAtLeastOneCharacterType
     case includesSCButEmpty
+    case couldNotSelectRandomCharacter
 }
 
 func random_character(
     characters_to_include: [PASSWORD_CHARACTER_INCLUDES],
-    special_to_include: String?
-) -> String {
+    special_to_include: String?,
+    no_difficult_to_distinguish: Bool = false
+) -> (String, PASSWORD_CHARACTER_INCLUDES) {
     var character = ""
-    if characters_to_include.contains(.special) && special_to_include != nil {
+    let choice_option = characters_to_include.randomElement()!
+    switch choice_option {
+    case .special:
         if let random_special = special_to_include?.randomElement() {
             character.append(random_special)
         }
-    }
-    if characters_to_include.contains(.uppercase) {
-        if let random_uppercase = UPPERCASE.randomElement() {
-            character.append(random_uppercase)
-        }
-    }
-    if characters_to_include.contains(.lowercase) {
-        if let random_lowercase = LOWERCASE.randomElement() {
-            character.append(random_lowercase)
-        }
-    }
-    if characters_to_include.contains(.number) {
-        if let random_number = NUMBERS.randomElement() {
+        break
+    case .number:
+        if let random_number = (no_difficult_to_distinguish ? NUMBERS_EASY_TO_DISTINGUISH : NUMBERS).randomElement() {
             character.append(random_number)
         }
+        break
+    case .lowercase:
+        if let random_lowercase = (no_difficult_to_distinguish ? LOWERCASE_EASY_TO_DISTINGUISH: LOWERCASE).randomElement() {
+            character.append(random_lowercase)
+        }
+        break
+    default:
+        if let random_uppercase = (no_difficult_to_distinguish ? UPPERCASE_EASY_TO_DISTINGUISH : UPPERCASE).randomElement() {
+            character.append(random_uppercase)
+        }
+        break
     }
-    let randomIndex = Int.random(in: 0..<character.count)
-    return String(
-        character[character.index(character.startIndex, offsetBy: randomIndex)])
+    return (character, choice_option)
 }
 
 func removeChar(
@@ -124,7 +139,8 @@ func password_gen(
     dictionaries: Dictionaries,
     minWordLength: Int?,
     maxWordLength: Int?,
-    dictionariesToUse: [String]?
+    dictionariesToUse: [String]?,
+    doNotUseDifficult: Bool = false
 ) throws -> String {
     // If password is random characters and the number of characters to include is less than the length of the required type of characters, throw an error. This is a shortcut failure, since the system wouldn't succeed even if this condition were not here.
     if password_type == .random_characters
@@ -161,7 +177,6 @@ func password_gen(
             max = maxWordLength!
         }
         if let dictionariesToUseEx = dictionariesToUse {
-            debugPrint(dictionariesToUseEx)
             if dictionariesToUseEx.contains("English") {
                 wordlistFiltered = dictionaries.english.filter { word in
                     word.count > min && word.count < max
@@ -181,17 +196,13 @@ func password_gen(
     }
     for _ in 0..<length {
         if password_type == .random_characters {
-            let random_selection = random_character(
+            let (random_selection, selection_type) = random_character(
                 characters_to_include: characters_to_include,
-                special_to_include: special_to_include)
-            if NUMBERS.contains(random_selection) {
-                hasChar[.number]! += 1
-            } else if UPPERCASE.contains(random_selection) {
-                hasChar[.uppercase]! += 1
-            } else if LOWERCASE.contains(random_selection) {
-                hasChar[.lowercase]! += 1
-            } else if special_to_include.contains(random_selection) {
-                hasChar[.special]! += 1
+                special_to_include: special_to_include, no_difficult_to_distinguish: doNotUseDifficult)
+            if !random_selection.isEmpty {
+                hasChar[selection_type]! += 1
+            } else {
+                throw PasswordCreationError.couldNotSelectRandomCharacter
             }
             password.append(random_selection)
         } else if password_type == .words {
@@ -209,11 +220,19 @@ func password_gen(
         }
     }
     for missing_char_type in missing_char_types {
-        let new_random_sel = random_character(
+        let (new_random_sel, _) = random_character(
             characters_to_include: [missing_char_type],
-            special_to_include: special_to_include)
+            special_to_include: special_to_include, no_difficult_to_distinguish: doNotUseDifficult)
+        
+        if (new_random_sel.isEmpty) {
+            throw PasswordCreationError.tooManyConstraints
+        }
+        
+        // overwrites password and hasChar
         (hasChar, password, _) = try removeChar(
             hasChar: hasChar, password: password, special: special_to_include)
+        
+        // Appends to new return from above
         password.append(new_random_sel)
     }
 

@@ -46,7 +46,8 @@ struct ContentView: View {
     @AppStorage("pwseparatorevery") private var separatorEvery: Int = 6
     @AppStorage("pwuseendict") private var useEnglishDictionary: Bool = true
     @AppStorage("pwuseesdict") private var useSpanishDictionary: Bool = false
-
+    @AppStorage("pwdonotusedifficult") private var doNotUseDifficult: Bool = false
+    
     // Password and ZXCVBN output - not stored in AppStorage. You can copy the result to the clipboard, but it is not stored between uses
     @State private var generatedPassword: String = ""
     @State private var result: MostGuessableMatchSequenceResult? = nil
@@ -141,7 +142,8 @@ struct ContentView: View {
                     dictionaries: dictionaries,
                     minWordLength: minWordLength,
                     maxWordLength: maxWordLength,
-                    dictionariesToUse: dictionariesToUse
+                    dictionariesToUse: dictionariesToUse,
+                    doNotUseDifficult: doNotUseDifficult
                 )
                 result = zxcvbn(generatedPassword)
             } catch PasswordCreationError

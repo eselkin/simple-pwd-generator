@@ -17,34 +17,38 @@ struct subcomponentTests {
         #expect(dictionaries.english.count == 42592)
     }
     @Test func randomCharacterWithNumber() async throws {
-        let randomchar = random_character(
+        let (randomchar, randomtype) = random_character(
             characters_to_include: [.number], special_to_include: "")
         let regex = try NSRegularExpression(
             pattern: "^[0-9]$")
+        #expect(randomtype == .number)
         #expect(
             regex.firstMatch(in: randomchar, range: NSMakeRange(0, 1)) != nil)
     }
     @Test func randomCharacterWithLC() async throws {
-        let randomchar = random_character(
+        let (randomchar, randomtype) = random_character(
             characters_to_include: [.lowercase], special_to_include: "")
         let regex = try NSRegularExpression(
             pattern: "^[a-z]$")
+        #expect(randomtype == .lowercase)
         #expect(
             regex.firstMatch(in: randomchar, range: NSMakeRange(0, 1)) != nil)
     }
     @Test func randomCharacterWithUC() async throws {
-        let randomchar = random_character(
+        let (randomchar, randomtype) = random_character(
             characters_to_include: [.uppercase], special_to_include: "")
         let regex = try NSRegularExpression(
             pattern: "^[A-Z]$")
+        #expect(randomtype == .uppercase)
         #expect(
             regex.firstMatch(in: randomchar, range: NSMakeRange(0, 1)) != nil)
     }
     @Test func randomCharacterWithSpecial() async throws {
-        let randomchar = random_character(
+        let (randomchar, randomtype) = random_character(
             characters_to_include: [.special], special_to_include: ".,")
         let regex = try NSRegularExpression(
             pattern: "^[.,]$")
+        #expect(randomtype == .special)
         #expect(
             regex.firstMatch(in: randomchar, range: NSMakeRange(0, 1)) != nil)
     }
@@ -296,5 +300,19 @@ struct completePasswordTests {
                 minWordLength: 50, maxWordLength: 100,
                 dictionariesToUse: ["English"])
         }
+    }
+    @Test func randomCharactersWithoutDifficultToReadLettersNumbers() {
+        let generatedPassword = try! password_gen(
+            characters_to_include: [
+                .uppercase, .lowercase, .number,
+            ], special_to_include: "!@?",
+            password_type: .random_characters, length: 20,
+            separator: .none,
+            separatorEvery: 1,
+            dictionaries: dictionaries,
+            minWordLength: nil, maxWordLength: nil,
+            dictionariesToUse: nil
+        )
+        #expect(generatedPassword.contains(DIFFICULT_TO_DISTINGUISH) == false)
     }
 }
