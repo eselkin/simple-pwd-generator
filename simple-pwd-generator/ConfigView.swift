@@ -12,6 +12,7 @@ struct ConfigView: View {
     @AppStorage("pwuseendict") private var useEnglishDictionary: Bool = true
     @AppStorage("pwuseesdict") private var useSpanishDictionary: Bool = false
     @AppStorage("pwdonotusedifficult") private var doNotUseDifficult: Bool = false
+    @AppStorage("keeppasswordfor") private var keepPasswordFor: Float64 = 30.0
     
     var body: some View {
 
@@ -37,6 +38,17 @@ struct ConfigView: View {
                     "Do not use confusing numbers and letters (e.g. 01OIloS5s)",
                     isOn: $doNotUseDifficult)
 
+            }
+            Section(header: Text("Security")) {
+                Picker("Keep password on screen for", selection: $keepPasswordFor){
+                    ForEach(1..<200) { i in
+                        if i % 15 == 0 {
+                            Text(
+                                String(i) + String(" seconds")
+                            ).tag(Float64(i))
+                        }
+                    }
+                }
             }
         }
     }

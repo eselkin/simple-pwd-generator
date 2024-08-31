@@ -46,8 +46,10 @@ struct ContentView: View {
     @AppStorage("pwseparatorevery") private var separatorEvery: Int = 6
     @AppStorage("pwuseendict") private var useEnglishDictionary: Bool = true
     @AppStorage("pwuseesdict") private var useSpanishDictionary: Bool = false
-    @AppStorage("pwdonotusedifficult") private var doNotUseDifficult: Bool = false
-    
+    @AppStorage("pwdonotusedifficult") private var doNotUseDifficult: Bool =
+        false
+    @AppStorage("keeppasswordfor") private var keepPasswordFor: Float64 = 30
+
     // Password and ZXCVBN output - not stored in AppStorage. You can copy the result to the clipboard, but it is not stored between uses
     @State private var generatedPassword: String = ""
     @State private var result: MostGuessableMatchSequenceResult? = nil
@@ -59,7 +61,7 @@ struct ContentView: View {
     @State private var showCopied: Bool = false
     @State private var timer: Timer?
     @State private var showRefreshAlert = false
-
+    @State private var clearPassword: Timer?
     var dictionaries = Dictionaries()
 
     // This is a convenience method to update the minimum shown in the picker wheel
@@ -146,6 +148,13 @@ struct ContentView: View {
                     doNotUseDifficult: doNotUseDifficult
                 )
                 result = zxcvbn(generatedPassword)
+                clearPassword = Timer.scheduledTimer(
+                    withTimeInterval: keepPasswordFor, repeats: false
+                ) {
+                    timer in
+                    generatedPassword = ""
+                    result = nil
+                }
             } catch PasswordCreationError
                 .couldNotFindIndexOfMostFrequentCharacterType
             {
@@ -187,13 +196,14 @@ struct ContentView: View {
                     }
                     .padding()
                 }
-                
+
                 Form {
-                    
-                    
+
                     Section(header: Text("Password generation")) {
-                        Picker("Type of password generation", selection: $passwordType)
-                        {
+                        Picker(
+                            "Type of password generation",
+                            selection: $passwordType
+                        ) {
                             Text("Select a type").tag(PASSWORD_TYPE.unselected)
                             Text("Random character").tag(
                                 PASSWORD_TYPE.random_characters)
@@ -207,24 +217,31 @@ struct ContentView: View {
                                 reset(type: .unselected)
                             }
                         }
-                        
+
                         if passwordType == .random_characters {
-                            Toggle("Include lowercase letters", isOn: $includeLC)
-                                .onChange(of: includeLC) {
-                                    setMin()
-                                }
-                            Toggle("Include uppercase letters", isOn: $includeUC)
-                                .onChange(of: includeUC) { setMin() }
-                            Toggle("Include numbers", isOn: $includeNC).onChange(
-                                of: includeNC
-                            ) {
+                            Toggle(
+                                "Include lowercase letters", isOn: $includeLC
+                            )
+                            .onChange(of: includeLC) {
                                 setMin()
                             }
-                            Toggle("Include special characters", isOn: $includeSC)
-                                .onChange(of: includeSC) {
+                            Toggle(
+                                "Include uppercase letters", isOn: $includeUC
+                            )
+                            .onChange(of: includeUC) { setMin() }
+                            Toggle("Include numbers", isOn: $includeNC)
+                                .onChange(
+                                    of: includeNC
+                                ) {
                                     setMin()
                                 }
-                            
+                            Toggle(
+                                "Include special characters", isOn: $includeSC
+                            )
+                            .onChange(of: includeSC) {
+                                setMin()
+                            }
+
                             // special characters requires the provision of a string of characters to choose from
                             if includeSC {
                                 LabeledContent {
@@ -235,20 +252,24 @@ struct ContentView: View {
                             }
                         } else if passwordType == .words {
                             // word specific form options. 6-50 word length, which is arbitrary. Once you go over 15 in the english language dictionary, there are too few options to choose from so the function will display an error.
-                            Picker("Minimum word length", selection: $minWordLength) {
+                            Picker(
+                                "Minimum word length", selection: $minWordLength
+                            ) {
                                 ForEach(5..<50) { i in
                                     Text(String(i)).tag(i)
                                 }
                             }
-                            Picker("Maximum word length", selection: $maxWordLength) {
+                            Picker(
+                                "Maximum word length", selection: $maxWordLength
+                            ) {
                                 ForEach(7..<50) { i in
                                     Text(String(i)).tag(i)
                                 }
                             }
-                            
+
                         }
                         if passwordType != .unselected {
-                            
+
                             Picker("Length of password", selection: $length) {
                                 ForEach(1..<200) { i in
                                     if i >= min {
@@ -256,44 +277,61 @@ struct ContentView: View {
                                     }
                                 }
                             }
-                            
+
                             Picker("Separator", selection: $separator) {
                                 Text("none").tag(PASSWORD_SEPARATOR.none)
                                 Text("underscore (_)").tag(
                                     PASSWORD_SEPARATOR.underscore)
                                 Text("comma (,)").tag(PASSWORD_SEPARATOR.comma)
                                 Text("dash (-)").tag(PASSWORD_SEPARATOR.dash)
-                                Text("exclamation mark (!)").tag(PASSWORD_SEPARATOR.exclamation)
-                                Text("question mark (?)").tag(PASSWORD_SEPARATOR.questionmark)
-                                Text("asterisk (*)").tag(PASSWORD_SEPARATOR.asterisk)
-                                Text("period (.)").tag(PASSWORD_SEPARATOR.period)
+                                Text("exclamation mark (!)").tag(
+                                    PASSWORD_SEPARATOR.exclamation)
+                                Text("question mark (?)").tag(
+                                    PASSWORD_SEPARATOR.questionmark)
+                                Text("asterisk (*)").tag(
+                                    PASSWORD_SEPARATOR.asterisk)
+                                Text("period (.)").tag(
+                                    PASSWORD_SEPARATOR.period)
                                 Text("random separator").tag(
                                     PASSWORD_SEPARATOR.random)
                             }
                             if separator != .none {
-                                Picker("Separator every", selection: $separatorEvery) {
+                                Picker(
+                                    "Separator every",
+                                    selection: $separatorEvery
+                                ) {
                                     if passwordType == .words {
                                         ForEach(1..<200) { i in
                                             if i == 1 {
-                                                Text(String(i) + String(" word")).tag(i)
+                                                Text(
+                                                    String(i) + String(" word")
+                                                ).tag(i)
                                             } else if i <= length {
-                                                Text(String(i) + String(" words")).tag(i)
+                                                Text(
+                                                    String(i) + String(" words")
+                                                ).tag(i)
                                             }
                                         }
                                     } else {
                                         ForEach(1..<200) { i in
                                             if i == 1 {
-                                                Text(String(i) + String(" character")).tag(
+                                                Text(
+                                                    String(i)
+                                                        + String(" character")
+                                                ).tag(
                                                     i)
                                             } else {
-                                                Text(String(i) + String(" characters")).tag(
+                                                Text(
+                                                    String(i)
+                                                        + String(" characters")
+                                                ).tag(
                                                     i)
                                             }
                                         }
                                     }
                                 }
                             }
-                            
+
                             Button(
                                 "Generate", systemImage: "plus.circle.fill",
                                 action: generate
@@ -302,7 +340,7 @@ struct ContentView: View {
                             ) {
                                 Alert(title: Text(errorMessage))
                             }
-                            
+
                         }
                     }
                     if generatedPassword != "" {
@@ -315,13 +353,13 @@ struct ContentView: View {
                                 ) { timer in
                                     showCopied = false
                                 }
-                                
+
                                 if !showCopied {
                                     timer?.invalidate()
                                 }
                             }
                             if let realResult = result {
-                                
+
                                 HStack {
                                     if let realResultScore = realResult.score {
                                         if realResultScore <= 2 {
@@ -351,18 +389,20 @@ struct ContentView: View {
                                         }
                                     }
                                 }
-                                if let crackTimesDisplay = realResult.crackTimesDisplay
+                                if let crackTimesDisplay = realResult
+                                    .crackTimesDisplay
                                 {
                                     LabeledContent {
                                         Text(
                                             crackTimesDisplay
-                                                .offlineFastHashing1e10PerSecond)
+                                                .offlineFastHashing1e10PerSecond
+                                        )
                                     } label: {
                                         Text("ZXCVBN length of time to crack")
                                     }
                                 }
                             }
-                            
+                            Text("Password will be cleared after \(String(format: "%0.f", keepPasswordFor)) seconds")
                             if showCopied {
                                 Text(copiedMsg)
                             }
