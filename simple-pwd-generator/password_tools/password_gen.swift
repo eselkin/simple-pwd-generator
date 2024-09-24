@@ -7,21 +7,21 @@
 
 import Foundation
 
-var DIFFICULT_TO_DISTINGUISH="01OIloQSs5"
-var NUMBERS = "0123456789"
-var NUMBERS_EASY_TO_DISTINGUISH = NUMBERS.filter {
+let DIFFICULT_TO_DISTINGUISH="01OIloQSs5"
+let NUMBERS = "0123456789"
+let NUMBERS_EASY_TO_DISTINGUISH = NUMBERS.filter {
     !DIFFICULT_TO_DISTINGUISH.contains($0)
 }
-var LOWERCASE = "abcdefghijklmnopqrstuvwxyz"
-var LOWERCASE_EASY_TO_DISTINGUISH = LOWERCASE.filter {
+let LOWERCASE = "abcdefghijklmnopqrstuvwxyz"
+let LOWERCASE_EASY_TO_DISTINGUISH = LOWERCASE.filter {
     !DIFFICULT_TO_DISTINGUISH.contains($0)
 }
-var UPPERCASE = LOWERCASE.uppercased()
-var UPPERCASE_EASY_TO_DISTINGUISH = LOWERCASE.uppercased().filter {
+let UPPERCASE = LOWERCASE.uppercased()
+let UPPERCASE_EASY_TO_DISTINGUISH = LOWERCASE.uppercased().filter {
     !DIFFICULT_TO_DISTINGUISH.contains($0)
 }
 
-var SEPARATORS = "_-,.!*?"
+let SEPARATORS = "_-,.!*?"
 
 enum PASSWORD_CHARACTER_INCLUDES: String, CaseIterable {
     case special

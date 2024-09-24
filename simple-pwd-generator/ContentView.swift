@@ -102,14 +102,21 @@ struct ContentView: View {
         includeNC = true
         includeSC = true
         includeUC = true
+        resetPassword()
+        clearPassword?.invalidate()
+        timer?.invalidate()
+    }
+    private func resetPassword() {
         generatedPassword = ""
         result = nil
     }
-
     private func generate() {
 
         showError = false
         errorMessage = ""
+        clearPassword?.invalidate()
+        timer?.invalidate()
+        resetPassword()
         var toInclude: [PASSWORD_CHARACTER_INCLUDES] = []
         var specialToInc: String = ""
         if includeLC {
@@ -150,10 +157,12 @@ struct ContentView: View {
                 result = zxcvbn(generatedPassword)
                 clearPassword = Timer.scheduledTimer(
                     withTimeInterval: keepPasswordFor, repeats: false
-                ) {
-                    timer in
-                    generatedPassword = ""
-                    result = nil
+                ) {_ in 
+                    Task {
+                        await MainActor.run {
+                            resetPassword()
+                        }
+                    }
                 }
             } catch PasswordCreationError
                 .couldNotFindIndexOfMostFrequentCharacterType
@@ -350,12 +359,13 @@ struct ContentView: View {
                                 showCopied = true
                                 timer = Timer.scheduledTimer(
                                     withTimeInterval: 2.0, repeats: false
-                                ) { timer in
-                                    showCopied = false
-                                }
-
-                                if !showCopied {
-                                    timer?.invalidate()
+                                ) { _ in
+                                        Task {
+                                            await MainActor.run {
+                                                showCopied = false
+                                                timer?.invalidate()
+                                            }
+                                        }
                                 }
                             }
                             if let realResult = result {
